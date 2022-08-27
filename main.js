@@ -3,6 +3,25 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+const glyphObject = {'♡':FULL_HEART, '♥':EMPTY_HEART}
+const colorState ={"red":"","":"red"}
+
+let likeButton = document.querySelectorAll(".like")
+for(el of likeButton){
+  el.addEventListener("click", (e)=>{
+    mimicServerCall()
+    .then((resp) =>{
+      e.target.innerText = glyphObject[e.target.innerText]
+      e.target.style.color = colorState[e.target.style.color]
+    })
+    .catch((error) =>{
+      document.getElementById("modal").className =""
+      setTimeout(function(){
+        document.getElementById("modal").className = "hidden"
+      }, 3000);
+    })
+  })
+}
 
 
 
